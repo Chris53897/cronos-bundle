@@ -22,20 +22,23 @@ jobs:
             symfony-version: 5.4.*
             stability: prefer-stable
           - php-version: 8.0
-            symfony-version: 6.0.*
+            symfony-version: 6.4.*
             stability: prefer-stable
           - php-version: 8.1
-            symfony-version: 6.2.*
+            symfony-version: 6.4.*
             stability: prefer-stable
           - php-version: 8.2
-            symfony-version: 6.2.*
+            symfony-version: 6.4.*
+            stability: prefer-stable
+          - php-version: 8.3
+            symfony-version: 6.4.*
             stability: prefer-stable
 
     name: PHP ${{ matrix.php-version }} Test with Symfony ${{ matrix.symfony-version }} and ${{ matrix.stability }}
     steps:
       # —— Setup Github actions 🐙 —————————————————————————————————————————————
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # https://github.com/shivammathur/setup-php (community)
       - name: Setup PHP, with composer and extensions
@@ -59,7 +62,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           # Use composer.json for key, if composer.lock is not committed.
