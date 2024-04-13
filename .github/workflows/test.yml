@@ -21,9 +21,6 @@ jobs:
           - php-version: 8.0
             symfony-version: 5.4.*
             stability: prefer-stable
-          - php-version: 8.0
-            symfony-version: 6.4.*
-            stability: prefer-stable
           - php-version: 8.1
             symfony-version: 6.4.*
             stability: prefer-stable
