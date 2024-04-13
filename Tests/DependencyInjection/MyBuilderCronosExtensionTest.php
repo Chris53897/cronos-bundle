@@ -3,6 +3,7 @@
 namespace MyBuilder\Bundle\CronosBundle\Tests\DependencyInjection;
 
 use MyBuilder\Bundle\CronosBundle\DependencyInjection\MyBuilderCronosExtension;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -23,6 +24,7 @@ class MyBuilderCronosExtensionTest extends TestCase
     /**
      * @dataProvider providerTestConfig
      */
+    #[DataProvider('providerTestConfig')]
     public function test_config(array $expected, string $file): void
     {
         $this->loader->load($this->getConfig($file), $this->container);
@@ -30,7 +32,7 @@ class MyBuilderCronosExtensionTest extends TestCase
         static::assertEquals($expected, $this->container->getParameter('mybuilder.cronos_bundle.exporter_config'));
     }
 
-    public function providerTestConfig(): array
+    public static function providerTestConfig(): array
     {
         if (method_exists(Kernel::class, 'getProjectDir')) {
             $pathToConsole = '%kernel.project_dir%/bin/console';

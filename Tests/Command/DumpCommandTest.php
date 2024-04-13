@@ -6,6 +6,7 @@ use MyBuilder\Bundle\CronosBundle\Command\DumpCommand;
 use MyBuilder\Bundle\CronosBundle\Command\ReplaceCommand;
 use MyBuilder\Bundle\CronosBundle\Tests\CronosTestCase;
 use MyBuilder\Bundle\CronosBundle\Tests\Fixtures\Command\TestCommand;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -36,6 +37,7 @@ class DumpCommandTest extends CronosTestCase
     /**
      * @dataProvider environmentDumps
      */
+    #[DataProvider('environmentDumps')]
     public function test_dump_should_be_as_expected(string $expectedOutput, array $input): void
     {
         $input = array_merge(['command' => $this->command->getName()], $input);
@@ -46,7 +48,7 @@ class DumpCommandTest extends CronosTestCase
         static::assertEquals($expectedOutput, trim($commandTester->getDisplay()));
     }
 
-    public function environmentDumps(): array
+    public static function environmentDumps(): array
     {
         return [
             [
